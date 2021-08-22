@@ -26,11 +26,32 @@
             <div id="result"></div>
         </div>
 
+        <div id="gameover">
+            <div id="finalScore"></div>
+            <input type="text" size="50" placeholder="Please enter your name for high score" name="playerName"/>
+            <button id="submitScore">SUBMIT</button>
+        </div>
 
+        <div id="highscoreContainer">
+            <div id="highscoreScreen">
 
+                    <div id="highscoreHeader"> 
+                        <h3>User name</h3>
+                        <h3>Score</h3>
+                    </div>
+
+                <div id="highscoreName"></div>
+                <div id= "highscoreScore"></div>
+            </div>
+        </div>
+        
+        <div id="endgameBtns">
+            <button id= "playAgain" onclick="replayQuiz()">PLAY AGAIN</button>
+            <button id= "clearHighscore" onclick="replayQuiz()">CLEAR SCORES</button>
+        </div>
 
     </div>
-
+    <script src="assets/javascript.js"></script>
 
 </body>
 </html>
