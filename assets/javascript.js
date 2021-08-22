@@ -1,28 +1,23 @@
-var startQuizDiv = document.getElementById("startscrn");
-var startQuizButton = document.getElementById("startbtn");
 var quizBody = document.getElementById("quiz");
-var quizTimer = document.getElementById("timer");
+var resultsEl = document.getElementById("result");
+var finalScoreEl = document.getElementById("finalScore");
+var gameoverDiv = document.getElementById("gameover");
 var questionsEl = document.getElementById("questions");
+var quizTimer = document.getElementById("timer");
+var startQuizButton = document.getElementById("startbtn");
+var startQuizDiv = document.getElementById("startscrn");
+var highscoreContainer = document.getElementById("highscoreContainer");
+var highscoreDiv = document.getElementById("highscoreScreen");
+var highscoreInputName = document.getElementById("playerName");
+var highscoreDisplayName = document.getElementById("highscoreName");
+var endGameBtns = document.getElementById("endGameBtns");
+var submitScoreBtn = document.getElementById("submitScore");
+var highscoreDisplayScore = document.getElementById("highscoreScore");
 var buttonA = document.getElementById("a");
 var buttonB = document.getElementById("b");
 var buttonC = document.getElementById("c");
 var buttonD = document.getElementById("d");
-var resultsEl = document.getElementById("result");
-var gameoverDiv = document.getElementById("gameover");
-var finalScoreEl = document.getElementById("finalScore");
-var highscoreInputName = document.getElementById("playerName");
-var submitScoreBtn = document.getElementById("submitScore");
-var highscoreContainer = document.getElementById("highscoreContainer");
-var highscoreDiv = document.getElementById("highscoreScreen");
-var highscoreDisplayName = document.getElementById("highscoreName");
-var highscoreDisplayScore = document.getElementById("highscoreScore");
-var endGameBtns = document.getElementById("endGameBtns");
-var finalQuestionIndex = quizQuestions.length;
-var currentQuestionIndex = 0;
-var timeLeft = 60;
-var timerInterval;
-var score = 0;
-var correct;
+
 
 
 var quizQuestions = [{
@@ -68,6 +63,13 @@ var quizQuestions = [{
 
 ];
 
+var finalQuestionIndex = quizQuestions.length;
+var currentQuestionIndex = 0;
+var timeLeft = 60;
+var timerInterval;
+var score = 0;
+var correct;
+
 function generateQuizQuestion(){
     gameoverDiv.style.display = "none";
     if (currentQuestionIndex === finalQuestionIndex){
@@ -97,6 +99,8 @@ function startQuiz(){
       }, 1000);
     quizBody.style.display = "block";
 }
+ 
+startQuizButton.addEventListener("click",startQuiz);
 
 function showScore(){
     quizBody.style.display = "none"
@@ -128,3 +132,59 @@ submitScoreBtn.addEventListener("click", function highscore(){
         generateHighscores();
     }
 });
+
+function generateHighscores(){
+    highscoreDisplayName.innerHTML = "";
+    highscoreDisplayScore.innerHTML = "";
+    var highscores = JSON.parse(localStorage.getItem("savedHighscores")) || [];
+    for (i=0; i<highscores.length; i++){
+        var newNameSpan = document.createElement("li");
+        var newScoreSpan = document.createElement("li");
+        newNameSpan.textContent = highscores[i].name;
+        newScoreSpan.textContent = highscores[i].score;
+        highscoreDisplayName.appendChild(newNameSpan);
+        highscoreDisplayScore.appendChild(newScoreSpan);
+    }
+}
+
+function showHighscore(){
+    startQuizDiv.style.display = "none"
+    gameoverDiv.style.display = "none";
+    highscoreContainer.style.display = "flex";
+    highscoreDiv.style.display = "block";
+    endGameBtns.style.display = "flex";
+
+    generateHighscores();
+}
+
+function clearScore(){
+    window.localStorage.clear();
+    highscoreDisplayName.textContent = "";
+    highscoreDisplayScore.textContent = "";
+}
+
+function replayQuiz(){
+    highscoreContainer.style.display = "none";
+    gameoverDiv.style.display = "none";
+    startQuizDiv.style.display = "flex";
+    timeLeft = 76;
+    score = 0;
+    currentQuestionIndex = 0;
+}
+
+function checkAnswer(answer){
+    correct = quizQuestions[currentQuestionIndex].correctAnswer;
+
+    if (answer === correct && currentQuestionIndex !== finalQuestionIndex){
+        score++;
+        alert("That Is Correct!");
+        currentQuestionIndex++;
+        generateQuizQuestion();
+    }else if (answer !== correct && currentQuestionIndex !== finalQuestionIndex){
+        alert("That Is Incorrect.")
+        currentQuestionIndex++;
+        generateQuizQuestion();
+    }else{
+        showScore();
+    }
+}
