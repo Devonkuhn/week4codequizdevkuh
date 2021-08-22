@@ -1,3 +1,24 @@
+var startQuizDiv = document.getElementById("startscrn");
+var startQuizButton = document.getElementById("startbtn");
+var quizBody = document.getElementById("quiz");
+var quizTimer = document.getElementById("timer");
+var questionsEl = document.getElementById("questions");
+var buttonA = document.getElementById("a");
+var buttonB = document.getElementById("b");
+var buttonC = document.getElementById("c");
+var buttonD = document.getElementById("d");
+var resultsEl = document.getElementById("result");
+var gameoverDiv = document.getElementById("gameover");
+var finalScoreEl = document.getElementById("finalScore");
+var highscoreInputName = document.getElementById("playerName");
+var submitScoreBtn = document.getElementById("submitScore");
+var highscoreContainer = document.getElementById("highscoreContainer");
+var highscoreDiv = document.getElementById("highscoreScreen");
+var highscoreDisplayName = document.getElementById("highscoreName");
+var highscoreDisplayScore = document.getElementById("highscoreScore");
+var endGameBtns = document.getElementById("endGameBtns");
+
+
 var quizQuestions = [{
 
     question:"Commonly used data types DO NOT include:",
