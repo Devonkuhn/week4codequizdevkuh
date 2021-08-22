@@ -43,3 +43,81 @@ button {
 button:hover {
     box-shadow: orangered;
 }
+
+#startscrn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#timer {
+    background-image: linear-gradient(red,yellow);
+    font-size:xx-large;
+    text-align: center;
+}
+
+#quiz {
+    display: none;
+}
+
+#result {
+    display:none;
+}
+
+#gameover {
+    text-align: center;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+#highscore {
+    height: 1.5rem;
+    border: groove 2px;
+}
+
+#highscoreScreen {
+    display: none;
+    width: 50%;
+    border: solid;
+    border-color: black;
+    padding-bottom: .3rem;
+    background: gold;
+}
+#highscoreHeader {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: .5rem;
+    background-image: linear-gradient(red,yellow);
+}
+
+#highscoreContainer {
+    height: 100%;
+    width: 100%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#highscoreName {
+    display: inline-block;
+    padding-left: 9.5rem;
+    font-weight: bold;
+}
+ 
+#highscoreScore {
+    float: right;
+    padding-right: 8.75rem;
+    font-weight: bold;
+}
+
+#finalScore {
+    padding-bottom: 0.5rem;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+#endgameBtns {
+    display: none;
+}
