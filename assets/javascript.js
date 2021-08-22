@@ -17,6 +17,12 @@ var highscoreDiv = document.getElementById("highscoreScreen");
 var highscoreDisplayName = document.getElementById("highscoreName");
 var highscoreDisplayScore = document.getElementById("highscoreScore");
 var endGameBtns = document.getElementById("endGameBtns");
+var finalQuestionIndex = quizQuestions.length;
+var currentQuestionIndex = 0;
+var timeLeft = 60;
+var timerInterval;
+var score = 0;
+var correct;
 
 
 var quizQuestions = [{
@@ -60,4 +66,34 @@ var quizQuestions = [{
     optionD:"C++",
     correctAwnser:"a"},
 
-    ];
+];
+
+function generateQuizQuestion(){
+    gameoverDiv.style.display = "none";
+    if (currentQuestionIndex === finalQuestionIndex){
+        return showScore();
+    } 
+    var currentQuestion = quizQuestions[currentQuestionIndex];
+    questionsEl.innerHTML = "<p>" + currentQuestion.question + "</p>";
+    buttonA.innerHTML = currentQuestion.optionA;
+    buttonB.innerHTML = currentQuestion.optionB;
+    buttonC.innerHTML = currentQuestion.optionC;
+    buttonD.innerHTML = currentQuestion.optionD;
+};
+
+function startQuiz(){
+    gameoverDiv.style.display = "none";
+    startQuizDiv.style.display = "none";
+    generateQuizQuestion();
+
+    timerInterval = setInterval(function() {
+        timeLeft--;
+        quizTimer.textContent = "TIME LEFT: " + timeLeft;
+    
+        if(timeLeft === 0) {
+          clearInterval(timerInterval);
+          showScore();
+        }
+      }, 1000);
+    quizBody.style.display = "block";
+}
